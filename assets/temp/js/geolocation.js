@@ -4,9 +4,6 @@ function fixedLocation() {
 
     var Location = "Guiyang City Guizhou 550001, PRC"
 
-    // 使用回调函数等待地理位置信息返回，确定南北半球，显示图片
-    NS(lat,get_moon_image_address);
-
 
 
     // 写入时间
