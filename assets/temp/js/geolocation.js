@@ -85,7 +85,7 @@ function get_moon_image_address()
     img.src = address;
 }
 
-
+get_moon_image_address();
 
 
 
