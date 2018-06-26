@@ -2,14 +2,7 @@
 function fixedLocation() {
     var LAT = 26.61375,LNG = 106.654225;
 
-    // 禁用异步以给变量赋值
-    $.ajaxSetup({async:false});
-    $.get("https://api.opencagedata.com/geocode/v1/json?q=" + LAT + "+" + LNG + "&key=4dc6e5713a2a4ff487166b5fed13bfd6&language=en&pretty=1", function(data) {
-        JSON = data;
-
-    })
-
-    var Location = JSON.results[0].formatted
+    var Location = "Guiyang City Guizhou 550001, PRC"
 
     // 使用回调函数等待地理位置信息返回，确定南北半球，显示图片
     NS(lat,get_moon_image_address);
