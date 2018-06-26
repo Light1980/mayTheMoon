@@ -74,11 +74,9 @@ function get_moon_image_address()
     /* prepend this path to the filename, if needed */
     var domain = "https://svs.gsfc.nasa.gov"
     // 根据纬度显示正确月相图
-    if (LAT = 1) {
-        var path = "/vis/a000000/a004600/a004604/";
-    } else {
-        var path = "/vis/a000000/a004600/a004605/"
-    }
+    
+    var path = "/vis/a000000/a004600/a004604/";
+    
 
 
     address = domain + path + "frames/730x730_1x1_30p/moon." + fn + ".jpg";
