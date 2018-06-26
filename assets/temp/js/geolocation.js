@@ -1,33 +1,15 @@
 
-
-var geolocation = navigator.geolocation.getCurrentPosition(successCB, errorCB)
-var LAT;
-var JSON,Location;
-
-function NS(a,b) {
-    if (a > 0) {
-        LAT = 1
-    } else {
-        LAT = 0
-    }
-
-    b();
-
-}
-
-function successCB(position) {
-    //console.info(position);
-    var lat = position.coords.latitude;
-    var lng = position.coords.longitude;
+function fixedLocation() {
+    var LAT = 26.61375,LNG = 106.654225;
 
     // 禁用异步以给变量赋值
     $.ajaxSetup({async:false});
-    $.get("https://api.opencagedata.com/geocode/v1/json?q=" + lat + "+" + lng + "&key=4dc6e5713a2a4ff487166b5fed13bfd6&language=en&pretty=1", function(data) {
+    $.get("https://api.opencagedata.com/geocode/v1/json?q=" + LAT + "+" + LNG + "&key=4dc6e5713a2a4ff487166b5fed13bfd6&language=en&pretty=1", function(data) {
         JSON = data;
 
     })
 
-    Location = JSON.results[0].formatted
+    var Location = JSON.results[0].formatted
 
     // 使用回调函数等待地理位置信息返回，确定南北半球，显示图片
     NS(lat,get_moon_image_address);
@@ -38,36 +20,14 @@ function successCB(position) {
     document.getElementById("date").innerHTML = Date();
 
     // 写入经纬度地点
-    document.getElementById("latlng").innerHTML = "Latitude: " +  lat.toFixed(2) + ", " + "Longitude: " + lng.toFixed(2) + ". ";
+    document.getElementById("latlng").innerHTML = "Latitude: " +  LAT.toFixed(2) + ", " + "Longitude: " + LNG.toFixed(2) + ". ";
 
     // 写入地点
     document.getElementById("location").innerHTML = Location;
 
-
-
-
 }
 
-
-function errorCB(error) {
-    console.error(error);
-    var msg='';
-    switch (error.code) {
-        case error.PERMISSION_DENIED:
-            msg = "用户拒绝对获取地理位置的请求。";
-            break;
-        case error.POSITION_UNAVAILABLE:
-            msg = "位置信息是不可用的。";
-            break;
-        case error.TIMEOUT:
-            msg = "请求用户地理位置超时。";
-            break;
-        case error.UNKNOWN_ERROR:
-            msg = "未知错误。";
-            break;
-    }
-    console.error(msg);
-}
+fixedLocation()
 
 /*
     Based on NASA SVS script: https://svs.gsfc.nasa.gov/vis/a000000/a004600/a004604/current_moon.js
